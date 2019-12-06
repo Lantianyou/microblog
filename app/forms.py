@@ -46,3 +46,14 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
                 raise ValidationError('Please use a different username.')
+
+
+class PostForm(FlaskForm):
+    post = TextAreaField('say anything', validators=[
+                         DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('submit')
+
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('email', validators=[DataRequired(), Email()])
+    submit = SubmitField('request submitted')

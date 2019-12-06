@@ -2,8 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from logging.handlers import SMTPHandler
-from logging.handlers import RotatingFileHandler
+from flask_mail import Mail
+from logging.handlers import SMTPHandler, RotatingFileHandler
 from config import Config
 import os
 import logging
@@ -17,6 +17,8 @@ migrate = Migrate(app, db)
 
 login = LoginManager(app)
 login.login_view = 'login'
+
+mail = Mail(app)
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
